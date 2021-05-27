@@ -35,9 +35,9 @@ RUN chmod +x kubectl
 RUN cp kubectl /usr/local/bin/
 
 COPY . .
-RUN cp sshd_config /etc/ssh/
-RUN cp shadow /etc
-RUN update-rc.d ssh defaults
+# RUN cp sshd_config /etc/ssh/
+# RUN cp shadow /etc
+# RUN update-rc.d ssh defaults
 ARG GOVERSION=go1.15.12.linux-amd64.tar.gz
 RUN curl -O https://storage.googleapis.com/golang/$GOVERSION && tar -C /usr/local -xzf $GOVERSION
 RUN echo "export PATH=$PATH:/usr/local/go/bin/" >>/etc/profile
