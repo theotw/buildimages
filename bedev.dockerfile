@@ -38,7 +38,7 @@ COPY . .
 # RUN cp sshd_config /etc/ssh/
 # RUN cp shadow /etc
 # RUN update-rc.d ssh defaults
-ARG GOVERSION=go1.15.12.linux-amd64.tar.gz
+ARG GOVERSION=go1.17.5.linux-amd64.tar.gz
 RUN curl -O https://storage.googleapis.com/golang/$GOVERSION && tar -C /usr/local -xzf $GOVERSION
 RUN echo "export PATH=$PATH:/usr/local/go/bin/" >>/etc/profile
 RUN echo PATH="/usr/local/go/bin/:/root/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin/" >/etc/environment
