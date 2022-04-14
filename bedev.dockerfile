@@ -1,8 +1,10 @@
 FROM ubuntu
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN	apt-get update && \
-    apt-get -y -q install curl \
+        apt-get -y -q install curl \
         make \
+	build-essential \
+	wget \
         openjdk-11-jdk \
         git \
         apt-transport-https \
@@ -38,8 +40,8 @@ COPY . .
 # RUN cp sshd_config /etc/ssh/
 # RUN cp shadow /etc
 # RUN update-rc.d ssh defaults
-ARG GOVERSION=go1.17.5.linux-amd64.tar.gz
-RUN curl -O https://storage.googleapis.com/golang/$GOVERSION && tar -C /usr/local -xzf $GOVERSION
+ARG goversion=nogo
+RUN curl -O https://dl.google.com/go/${goversion}.linux-arm64.tar.gz && tar -C /usr/local -xzf "${goversion}.linux-arm64.tar.gz"
 RUN echo "export PATH=$PATH:/usr/local/go/bin/" >>/etc/profile
 RUN echo PATH="/usr/local/go/bin/:/root/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin/" >/etc/environment
 RUN echo PATH=/usr/local/go/bin/:/root/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin/$PATH >>/root/.profile
